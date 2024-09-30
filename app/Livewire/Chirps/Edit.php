@@ -33,8 +33,4 @@ class Edit extends Component
     {
         $this->dispatch('chirp-edit-canceled');
     }  
-    public function render()
-    {
-        return view('livewire.chirps.edit');
-    }
 }
