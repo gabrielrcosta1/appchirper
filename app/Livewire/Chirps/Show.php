@@ -8,22 +8,34 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Show extends Component
-{
-    public Collection $chirps; 
+{public Collection $chirps;
+ 
+    public ?Chirp $editing = null; 
+ 
     public function mount(): void
     {
-        $this->getChirps(); 
-    } 
-
+        $this->getChirps();
+    }
+ 
     #[On('chirp-created')]
     public function getChirps(): void
     {
         $this->chirps = Chirp::with('user')
             ->latest()
             ->get();
-    } 
-    public function render()
+    }
+    #[On('chirp-edit-canceled')]
+    #[On('chirp-updated')] 
+    public function disableEditing(): void
     {
-        return view('livewire.chirps.show');
+        $this->editing = null;
+ 
+        $this->getChirps();
+    } 
+    public function edit(Chirp $chirp): void
+    {
+        $this->editing = $chirp;
+ 
+        $this->getChirps();
     }
 }
