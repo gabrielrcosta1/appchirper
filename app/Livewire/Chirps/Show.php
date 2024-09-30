@@ -38,4 +38,12 @@ class Show extends Component
  
         $this->getChirps();
     }
+    public function delete(Chirp $chirp): void
+    {
+        $this->authorize('delete', $chirp);
+ 
+        $chirp->delete();
+ 
+        $this->getChirps();
+    } 
 }
