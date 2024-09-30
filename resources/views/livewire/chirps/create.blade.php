@@ -1,4 +1,11 @@
 <div>
+    @guest
+    <div class="mx-auto max-w-screen-sm text-center lg:mb-8 mb-8">
+        <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">{{ __('Create your account to publish on chirper') }}</p>
+    </div> 
+    @endguest
+   
+    @auth
     <form wire:submit="store"> 
         <textarea
             wire:model="message"
@@ -8,5 +15,7 @@
  
         <x-input-error :messages="$errors->get('message')" class="mt-2" />
         <x-primary-button class="mt-4">{{ __('Chirp') }}</x-primary-button>
-    </form> 
+    </form>  
+    @endauth
+    
 </div>
